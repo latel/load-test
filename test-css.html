@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>样式表载入完成事件测试</title>
+    </head>
+    
+    <body>
+        <script type="text/javascript">
+            var head = document.getElementsByTagName('HEAD')[0]
+               ,link = document.createElement('LINK');
+
+            function output(text) {
+                var pNode = document.createElement('P');
+                pNode.innerHTML = text;
+                document.body.appendChild(pNode);
+                pNode = null;
+            }
+
+            if (document.addEventListener) {
+                link.addEventListener('load', function() {
+                    output('有效: addEventListener load');
+                });
+            }
+            else {
+                link.attachEvent('onload', function() {
+                    output('有效: attachEvent onload');
+                });
+            }
+
+            link.onload = function() {
+                output('有效: onload');
+            };
+
+            link.onreadystatechange = function() {
+                if (/loaded|complete/.test(link.readyState)) {
+                    alert(link.readyState);
+                    output('有效: onreadystatechange');
+                }
+            };
+
+            link.type = 'text/css';
+            link.rel = 'stylesheet';
+            link.href = 'test.css';
+            alert('href 已经设置');
+            setTimeout(function() {
+                alert('link 已经插入');
+                head.appendChild(link);
+            }, 5000);
+        </script>
+    </body>
+</html>

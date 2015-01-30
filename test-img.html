@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>图片载入完成事件测试</title>
+    </head>
+    
+    <body>
+        <script type="text/javascript">
+            var img = document.createElement('IMG');
+
+            function output(text) {
+                var pNode = document.createElement('P');
+                pNode.innerHTML = text;
+                document.body.appendChild(pNode);
+                pNode = null;
+            }
+
+            if (document.addEventListener) {
+                img.addEventListener('load', function() {
+                    output('有效: addEventListener load');
+                });
+            }
+            else {
+                img.attachEvent('onload', function() {
+                    output('有效: attachEvent onload');
+                });
+            }
+
+            img.onload = function() {
+                output('有效: onload');
+            };
+
+            img.onreadystatechange = function() {
+                if (/loaded|complete/.test(img.readyState)) {
+                    alert(img.readyState);
+                    output('有效: onreadystatechange');
+                }
+            };
+
+            img.src = 'test.jpg';
+            alert('src 已经设置');
+            setTimeout(function() {
+                alert('img 已经插入');
+                document.body.appendChild(img);
+            }, 5000);
+        </script>
+    </body>
+</html>

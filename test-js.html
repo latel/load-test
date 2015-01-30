@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>JS脚本载入完成事件测试</title>
+    </head>
+    
+    <body>
+        <script type="text/javascript">
+            var head = document.getElementsByTagName('HEAD')[0]
+               ,script = document.createElement('SCRIPT');
+
+            function output(text) {
+                var pNode = document.createElement('P');
+                pNode.innerHTML = text;
+                document.body.appendChild(pNode);
+                pNode = null;
+            }
+
+            if (document.addEventListener) {
+                script.addEventListener('load', function() {
+                    output('有效: addEventListener load');
+                });
+            }
+            else {
+                script.attachEvent('onload', function() {
+                    output('有效: attachEvent onload');
+                });
+            }
+
+            script.onload = function() {
+                output('有效: onload');
+            };
+
+            script.onreadystatechange = function() {
+                if (/loaded|complete/.test(script.readyState)) {
+                    alert(script.readyState);
+                    output('有效: onreadystatechange');
+                }
+            };
+
+            script.type = 'text/javascript';
+            script.src = 'test.js';
+            alert('src 已经设置');
+            setTimeout(function() {
+                alert('script 已经插入');
+                head.appendChild(script);
+            }, 5000);
+        </script>
+    </body>
+</html>
