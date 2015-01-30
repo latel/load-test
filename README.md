@@ -8,7 +8,8 @@
 >  但是我们发现 IE6、IE7和IE8在动态引入 Javascript 文件时只支持 onreadystatechange事件，  
 >  不支持 onload 和 attach onload 事件。  
 >
-> 因此在此做出一个小测试，以便彻底弄清楚各个浏览器的支持情况。
+>  因此在此做出一个小测试，以便彻底弄清楚各个浏览器的支持情况。
+>  以便更新和维护自己编写的 Javascript AMD 模块加载器。
 
 ___测试样本：___
 
@@ -140,5 +141,5 @@ ___测试样本：___
 ##有益的结论
 
 + IE11趋向于同 Chrome、 Firefox 和 Safari 保持一致，样式表，js脚本和图片都会响应 onload 和 attachEventListener load
-+ IE全系列都会预加载图片和js脚本资源，而 Chrome、Safari 和 Firefox 智慧预加载图片资源
++ IE全系列都会预加载图片和js脚本资源，而 Chrome、Safari 和 Firefox 只会预加载图片资源
 + 除了IE678在加载js脚本时不响应onload方法外，其他浏览器都会响应样式表、js脚本和图片的onload事件。IE678对js脚本的处理是个例外。
