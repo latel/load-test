@@ -142,4 +142,3 @@ ___测试样本：___
 + IE11趋向于同 Chrome、 Firefox 和 Safari 保持一致，样式表，js脚本和图片都会响应 onload 和 attachEventListener load
 + IE全系列都会预加载图片和js脚本资源，而 Chrome、Safari 和 Firefox 智慧预加载图片资源
 + 除了IE678在加载js脚本时不响应onload方法外，其他浏览器都会响应样式表、js脚本和图片的onload事件。IE678对js脚本的处理是个例外。
-+ 除了IE9 IE10 IE11在加载样式表资源之外，任何版本的IE浏览器都响应js脚本、图片和样式表的onreadystatechange事件。
